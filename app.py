@@ -1,10 +1,20 @@
-from aiohttp import web
+import asyncio
+import os
+from aiogram import Bot, Dispatcher, types
+from dotenv import load_dotenv
 
-async def handle(request):
-    return web.Response(text="Ассистент Афина на связи!")
+load_dotenv()
 
-app = web.Application()
-app.add_routes([web.get("/", handle)])
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+bot = Bot(token=BOT_TOKEN)
+dp = Dispatcher()
+
+@dp.message()
+async def echo(message: types.Message):
+    await message.answer("Привет, я Афина!")
+
+async def main():
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    web.run_app(app)
+    asyncio.run(main())
