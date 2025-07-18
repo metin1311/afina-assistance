@@ -9,7 +9,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
-@dp.message_handler(commands=['start'])
+@dp.message_handler(commands=["start"])
 async def start_cmd(message: types.Message):
     await message.reply("Бот работает!")
 
